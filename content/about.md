@@ -1,7 +1,7 @@
 ---
 title: About
-description: 
-image: /images/lake-6798400_1280.jpg
+description:
+image: objects.homelab.tomellm.eu/ellmenreich-webiste/tribal-leader-ermanaric.jpg
 ---
 Lorem ipsum odor amet, consectetuer adipiscing elit. Pellentesque commodo venenatis magna porta taciti posuere laoreet erat. Neque suscipit taciti dis nam vitae tincidunt. Rhoncus etiam ultricies nisl accumsan vehicula odio. Phasellus ut sed libero volutpat enim semper euismod pellentesque faucibus. Tempor rutrum orci vestibulum nisl congue imperdiet volutpat proin. Fusce conubia iaculis duis sapien blandit egestas. Tempus ante ornare maximus duis imperdiet quam phasellus inceptos.
 

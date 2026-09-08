@@ -1,7 +1,7 @@
 ---
 title: Contact
-description: 
-image: /images/lake-6798400_1280.jpg
+description:
+image: objects.homelab.tomellm.eu/ellmenreich-webiste/tribal-leader-ermanaric.jpg
 ---
 
 

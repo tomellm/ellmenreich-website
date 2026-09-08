@@ -1,43 +1,31 @@
-title: "Jane Doe"
-description: "This person does not exist"
+title: "Ellmenreichs"
+description: "servus"
 favicon: "/logo.png"
-image: "/images/lake-6798400_1280.jpg"
-language: "en"
-locale: "en_US"
+image: "objects.homelab.tomellm.eu/ellmenreich-webiste/tribal-leader-ermanaric.jpg"
+language: "de"
+locale: "de_IT"
 formspree_id: ""
-url: "https://clean.000000076.xyz"
-metasocial: 
- - facebook: "https://facebook.com/StartBootstrap"
- - twitteruser: "@SBootstrap"
- - twitter: "https://twitter.com/SBootstrap"
-nav_title: "Dev"
-navbar: 
- - nav: "Home" 
+metasocial:
+ - facebook: "https://I-still-have-to-be-set"
+nav_title: "Ellmis"
+navbar:
+ - nav: "Home"
    link: "/"
- - nav: "About" 
+ - nav: "About"
    link: "/about/"
- - nav: "Blog" 
-   link: "/blog/"
- - nav: "Contact" 
+ - nav: "Contact"
    link: "/contact/"
- - nav: "Search" 
-   link: "/search/"
- - nav: "Download"
-   link: "https://github.com/adamdjbrett/11ty-clean-blog-startboostrap"
-blog: 
- button: Exlpore All Post
- url: /blog/
-footer: 
-  social: 
-      - title: "Follow Me on Twitter" 
+footer:
+  social:
+      - title: "Follow Me on Twitter"
         icon: "fab fa-twitter"
-        link: "https://x.com/SBootstrap"
-      - title: "Follow Me on Facebook" 
+        link: "https://I-still-have-to-be-set"
+      - title: "Follow Me on Facebook"
         icon: "fab fa-facebook"
-        link: "https://facebook.com/startbootstrap"
-      - title: "Follow Me on github" 
+        link: "https://I-still-have-to-be-set"
+      - title: "Follow Me on github"
         icon: "fab fa-github"
-        link: "https://github.com/adamdjbrett/11ty-clean-blog-startboostrap"
+        link: "https://I-still-have-to-be-set"
       - title: "Follow Me on RSS"
         icon: "fas fa-rss"
         link: "/feed/feed.xml"
@@ -45,10 +33,7 @@ footer:
   text1: " Built with "
   text2: Eleventy 11ty
   text2_link: https://11ty.dev
-  text3: "| Developed by"
-  text4: "Start Bootstrap"
-  text4_link: https://startbootstrap.com/theme/clean-blog
-author: 
- name: "John Doe"
- email: "nope@example.com"
+author:
+ name: "Friedrich & Thomas Ellmenreich"
+ email: "fidi@gmef.com"
  url: "/about/"
