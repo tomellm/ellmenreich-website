@@ -7,27 +7,35 @@ layout: base.njk
 {%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
 {% include "partials/header_post.njk" %}
 <article class="mb-4">
-<div class="container px-4 px-lg-5">
-<div class="row gx-4 gx-lg-5 justify-content-center">
-<div class="col-md-10 col-lg-8 col-xl-7">
-<heading-anchors>
-{{ content | safe }}
-</heading-anchors>
-{%- if collections.posts %}
-{%- set previousPost = collections.posts | getPreviousCollectionItem %}
-{%- set nextPost = collections.posts | getNextCollectionItem %}
-{%- if nextPost or previousPost %}
-<div class="row mt-5">
-<div class="col-6">
-{%- if previousPost %}<a class="btn btn-primary text-uppercase col-12" href="{{ previousPost.url | locale_url }}">← {{ t.post.previous }}</a>{% endif %}
-</div>
-<div class="col-6 text-end justify-content-end mb-4">
-{%- if nextPost %}<a class="btn btn-primary text-uppercase col-12" href="{{ nextPost.url | locale_url }}">{{ t.post.next }} →</a>{% endif %}
-</div>
-</div>
-{%- endif %}
-{%- endif %}
-</div>
-</div>
-</div>
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+			<heading-anchors>
+				{{ content | safe }}
+			</heading-anchors>
+			{%- if collections.posts %}
+			{%- set previousPost = collections.posts | getPreviousCollectionItem %}
+			{%- set nextPost = collections.posts | getNextCollectionItem %}
+			{%- if nextPost or previousPost %}
+			<div class="row mt-5">
+				<div class="col-6">
+					{%- if previousPost %}
+					<a class="btn btn-primary text-uppercase col-12" href="{{ previousPost.url | locale_url }}">
+						← {{ t.post.previous }}
+					</a>
+					{% endif %}
+				</div>
+				<div class="col-6 text-end justify-content-end mb-4">
+					{%- if nextPost %}
+					<a class="btn btn-primary text-uppercase col-12" href="{{ nextPost.url | locale_url }}">
+						{{ t.post.next }} →
+					</a>
+					{% endif %}
+				</div>
+			</div>
+			{%- endif %}
+			{%- endif %}
+			</div>
+		</div>
+	</div>
 </article>
