@@ -44,11 +44,6 @@ de:
         searching: "Suche nach [SEARCH_TERM] …"
     footer:
         builtWith: "Erstellt mit"
-        social:
-            twitter: "Ellmenreichs auf Twitter folgen"
-            facebook: "Ellmenreichs auf Facebook folgen"
-            github: "Ellmenreichs auf GitHub folgen"
-            rss: "Den RSS-Feed abonnieren"
 
 it:
     languageName: "Italiano"
@@ -96,11 +91,6 @@ it:
         searching: "Ricerca di [SEARCH_TERM] …"
     footer:
         builtWith: "Realizzato con"
-        social:
-            twitter: "Segui Ellmenreichs su Twitter"
-            facebook: "Segui Ellmenreichs su Facebook"
-            github: "Segui Ellmenreichs su GitHub"
-            rss: "Iscriviti al feed RSS"
 
 en:
     languageName: "English"
@@ -148,11 +138,6 @@ en:
         searching: "Searching for [SEARCH_TERM] …"
     footer:
         builtWith: "Built with"
-        social:
-            twitter: "Follow Ellmenreichs on Twitter"
-            facebook: "Follow Ellmenreichs on Facebook"
-            github: "Follow Ellmenreichs on GitHub"
-            rss: "Subscribe to the RSS feed"
 
 fr:
     languageName: "Français"
@@ -200,8 +185,3 @@ fr:
         searching: "Recherche de [SEARCH_TERM]…"
     footer:
         builtWith: "Créé avec"
-        social:
-            twitter: "Suivre les Ellmenreich sur Twitter"
-            facebook: "Suivre les Ellmenreich sur Facebook"
-            github: "Suivre les Ellmenreich sur GitHub"
-            rss: "S’abonner au flux RSS"

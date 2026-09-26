@@ -6,7 +6,6 @@ import {
 } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
-import pluginNavigation from "@11ty/eleventy-navigation";
 import yaml from "js-yaml";
 import pluginFilters from "./_config/filters.js";
 import { execSync } from "child_process";
@@ -59,7 +58,6 @@ export default async function (eleventyConfig) {
 		preAttributes: { tabindex: 0 },
 	});
 	eleventyConfig.addPlugin(pluginPWA);
-	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
 	eleventyConfig.addPlugin(I18nPlugin, {
@@ -119,10 +117,6 @@ export default async function (eleventyConfig) {
 		// by default we use Eleventy’s built-in `slugify` filter:
 		// slugify: eleventyConfig.getFilter("slugify"),
 		// selector: "h1,h2,h3,h4,h5,h6", // default
-	});
-
-	eleventyConfig.addShortcode("currentBuildDate", () => {
-		return new Date().toISOString();
 	});
 
 	eleventyConfig.addFilter("cssmin", function (code) {
