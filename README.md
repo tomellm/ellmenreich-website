@@ -5,6 +5,7 @@ This is a multilingual Eleventy site for the Ellmenreich family. German is the d
 - German: `/de/`
 - Italian: `/it/`
 - English: `/en/`
+- French: `/fr/`
 
 The root URL redirects to the German homepage. The structure follows [Eleventy’s internationalization guide](https://www.11ty.dev/docs/i18n/), using one matching content tree per language and Eleventy’s bundled i18n plugin for localized links.
 

@@ -13,7 +13,7 @@ import { execSync } from "child_process";
 import pluginPWA from "eleventy-plugin-pwa-v2";
 import CleanCSS from "clean-css";
 
-const languages = ["de", "it", "en"];
+const languages = ["de", "it", "en", "fr"];
 const siteUrl = (process.env.SITE_URL || "http://localhost:8080").replace(
 	/\/$/,
 	"",
@@ -79,6 +79,7 @@ export default async function (eleventyConfig) {
 		de: { subtitle: "Neuigkeiten von der Familie Ellmenreich" },
 		it: { subtitle: "Novità dalla famiglia Ellmenreich" },
 		en: { subtitle: "News from the Ellmenreich family" },
+		fr: { subtitle: "Actualités de la famille Ellmenreich" },
 	};
 
 	for (const language of languages) {
