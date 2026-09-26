@@ -1,45 +1,46 @@
 import { DateTime } from "luxon";
 
-export default function(eleventyConfig) {
-	eleventyConfig.addFilter("readableDate", (dateObj, locale = "de", format, zone) => {
-		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
-		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" })
-			.setLocale(locale)
-			.toFormat(format || "dd LLLL yyyy");
-	});
+export default function (eleventyConfig) {
+	eleventyConfig.addFilter(
+		"readableDate",
+		(dateObj, locale = "de", format, zone) => {
+			// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
+			return DateTime.fromJSDate(dateObj, { zone: zone || "utc" })
+				.setLocale(locale)
+				.toFormat(format || "dd LLLL yyyy");
+		},
+	);
 
 	eleventyConfig.addFilter("htmlDateString", (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat('yyyy-LL-dd');
+		return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(
+			"yyyy-LL-dd",
+		);
 	});
 
-// author inject here..
-
-	eleventyConfig.addFilter("getAuthor", (authors,label) => {
-		let author = authors.filter(a => a.key === label)[0];
+	eleventyConfig.addFilter("getAuthor", (authors, label) => {
+		let author = authors.filter((a) => a.key === label)[0];
 		return author;
 	});
 
-	eleventyConfig.addFilter("getPostsByAuthor", (posts,author) => {
-		return posts.filter(a => a.data.author === author);
+	eleventyConfig.addFilter("getPostsByAuthor", (posts, author) => {
+		return posts.filter((a) => a.data.author === author);
 	});
 
-// author inject here..
+	eleventyConfig.addNunjucksFilter("limit", (arr, limit) =>
+		arr.slice(0, limit),
+	);
 
-
-	  
-		eleventyConfig.addNunjucksFilter("limit", (arr, limit) => arr.slice(0, limit));
-		
-		eleventyConfig.addFilter("min", (...numbers) => {
-			return Math.min.apply(null, numbers);
-		});
+	eleventyConfig.addFilter("min", (...numbers) => {
+		return Math.min.apply(null, numbers);
+	});
 
 	// Get the first `n` elements of a collection.
 	eleventyConfig.addFilter("head", (array, n) => {
-		if(!Array.isArray(array) || array.length === 0) {
+		if (!Array.isArray(array) || array.length === 0) {
 			return [];
 		}
-		if( n < 0 ) {
+		if (n < 0) {
 			return array.slice(n);
 		}
 
@@ -52,12 +53,12 @@ export default function(eleventyConfig) {
 	});
 
 	// Return the keys used in an object
-	eleventyConfig.addFilter("getKeys", target => {
+	eleventyConfig.addFilter("getKeys", (target) => {
 		return Object.keys(target);
 	});
 
 	eleventyConfig.addFilter("filterByLanguage", (items, language) => {
-		return (items || []).filter(item => item.data.lang === language);
+		return (items || []).filter((item) => item.data.lang === language);
 	});
 
 	eleventyConfig.addFilter("includeCurrentLocale", (links, language) => {
@@ -65,13 +66,16 @@ export default function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
-		return (tags || []).filter(tag => tag !== "all" && !tag.startsWith("posts"));
+		return (tags || []).filter(
+			(tag) => tag !== "all" && !tag.startsWith("posts"),
+		);
 	});
 
 	eleventyConfig.addFilter("getLocaleTags", (collections, language) => {
 		return Object.keys(collections || {})
-			.filter(tag => tag !== "all" && !tag.startsWith("posts"))
-			.filter(tag => collections[tag].some(item => item.data.lang === language));
+			.filter((tag) => tag !== "all" && !tag.startsWith("posts"))
+			.filter((tag) =>
+				collections[tag].some((item) => item.data.lang === language),
+			);
 	});
-
-};
+}

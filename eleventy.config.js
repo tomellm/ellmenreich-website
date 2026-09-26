@@ -1,23 +1,31 @@
-import { HtmlBasePlugin, IdAttributePlugin, I18nPlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
+import {
+	HtmlBasePlugin,
+	IdAttributePlugin,
+	I18nPlugin,
+	InputPathToUrlTransformPlugin,
+} from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import yaml from "js-yaml";
 import pluginFilters from "./_config/filters.js";
-import { execSync } from 'child_process';
+import { execSync } from "child_process";
 import pluginPWA from "eleventy-plugin-pwa-v2";
 import CleanCSS from "clean-css";
 
 const languages = ["de", "it", "en"];
-const siteUrl = (process.env.SITE_URL || "http://localhost:8080").replace(/\/$/, "");
+const siteUrl = (process.env.SITE_URL || "http://localhost:8080").replace(
+	/\/$/,
+	"",
+);
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
-export default async function(eleventyConfig) {
+export default async function (eleventyConfig) {
 	eleventyConfig.addGlobalData("siteUrl", siteUrl);
 
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
-		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
+		if (data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
 			return false;
 		}
 	});
@@ -26,7 +34,7 @@ export default async function(eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig
 		.addPassthroughCopy({
-			"./public/": "/"
+			"./public/": "/",
 		})
 		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
 
@@ -48,9 +56,9 @@ export default async function(eleventyConfig) {
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginSyntaxHighlight, {
-		preAttributes: { tabindex: 0 }
+		preAttributes: { tabindex: 0 },
 	});
-	  eleventyConfig.addPlugin(pluginPWA);
+	eleventyConfig.addPlugin(pluginPWA);
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
@@ -59,10 +67,11 @@ export default async function(eleventyConfig) {
 		errorMode: "strict",
 	});
 
-	for(const language of languages) {
-		eleventyConfig.addCollection(`posts_${language}`, collectionApi => {
-			return collectionApi.getFilteredByTag("posts")
-				.filter(item => item.data.lang === language);
+	for (const language of languages) {
+		eleventyConfig.addCollection(`posts_${language}`, (collectionApi) => {
+			return collectionApi
+				.getFilteredByTag("posts")
+				.filter((item) => item.data.lang === language);
 		});
 	}
 
@@ -72,7 +81,7 @@ export default async function(eleventyConfig) {
 		en: { subtitle: "News from the Ellmenreich family" },
 	};
 
-	for(const language of languages) {
+	for (const language of languages) {
 		eleventyConfig.addPlugin(feedPlugin, {
 			type: "atom",
 			inputPath: `eleventy-plugin-feed-${language}.njk`,
@@ -95,11 +104,13 @@ export default async function(eleventyConfig) {
 		});
 	}
 
-	  eleventyConfig.on('eleventy.after', () => {
-		execSync(`npx pagefind --site _site --glob \"**/*.html\"`, { encoding: 'utf-8' })
-	  })
+	eleventyConfig.on("eleventy.after", () => {
+		execSync(`npx pagefind --site _site --glob \"**/*.html\"`, {
+			encoding: "utf-8",
+		});
+	});
 
-    eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
+	eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
 
@@ -110,7 +121,7 @@ export default async function(eleventyConfig) {
 	});
 
 	eleventyConfig.addShortcode("currentBuildDate", () => {
-		return (new Date()).toISOString();
+		return new Date().toISOString();
 	});
 
 	eleventyConfig.addFilter("cssmin", function (code) {
@@ -124,18 +135,12 @@ export default async function(eleventyConfig) {
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
 	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
-};
+}
 
 export const config = {
 	// Control which files Eleventy will process
 	// e.g.: *.md, *.njk, *.html, *.liquid
-	templateFormats: [
-		"md",
-		"njk",
-		"html",
-		"liquid",
-		"11ty.js",
-	],
+	templateFormats: ["md", "njk", "html", "liquid", "11ty.js"],
 
 	// Pre-process *.md files with: (default: `liquid`)
 	markdownTemplateEngine: "njk",
@@ -145,10 +150,10 @@ export const config = {
 
 	// These are all optional:
 	dir: {
-		input: "content",          // default: "."
-		includes: "../_includes",  // default: "_includes" (`input` relative)
-		data: "../_data",          // default: "_data" (`input` relative)
-		output: "_site"
+		input: "content", // default: "."
+		includes: "../_includes", // default: "_includes" (`input` relative)
+		data: "../_data", // default: "_data" (`input` relative)
+		output: "_site",
 	},
 
 	// -----------------------------------------------------------------
