@@ -1,23 +1,31 @@
 {% set t = translations[lang] %}
 <footer class="border-top">
-<div class="container px-4 px-lg-5">
-<div class="row gx-4 gx-lg-5 justify-content-center">
-<div class="col-md-10 col-lg-8 col-xl-7">
-<ul class="list-inline text-center">
-{% for s in metadata.footer.social %}<li class="list-inline-item">
-<a href="{% if s.key == 'rss' %}/{{ lang }}{{ s.link }}{% else %}{{ s.link }}{% endif %}" title="{{ t.footer.social[s.key] }}"{% if s.key != 'rss' %} target="_blank" rel="noopener"{% endif %}>
-<span class="fa-stack fa-lg">
-<i class="fas fa-circle fa-stack-2x"></i>
-<i class="{{s.icon}} fa-stack-1x fa-inverse"></i>
-</span>
-</a>
-</li>{% endfor %}
-</ul>
-<div class="small text-center text-muted fst-italic">{{ metadata.footer.copyrights }}<small><br>{{ t.footer.builtWith }} <a href="https://www.11ty.dev/">Eleventy 11ty</a></small></div>
-</div>
-</div>
-</div>
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-4 gx-lg-5 justify-content-center">
+			<div class="col-md-10 col-lg-8 col-xl-7">
+				<ul class="list-inline text-center">
+					{% for s in metadata.footer.social %}
+					<li class="list-inline-item">
+						<a	href="{% if s.key == 'rss' %}/{{ lang }}{{ s.link }}{% else %}{{ s.link }}{% endif %}"
+								title="{{ t.footer.social[s.key] }}"{% if s.key != 'rss' %}
+								target="_blank"
+								rel="noopener"{% endif %}>
+							<span class="fa-stack fa-lg">
+								<i class="fas fa-circle fa-stack-2x"></i>
+								<i class="{{s.icon}} fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</li>
+					{% endfor %}
+				</ul>
+				<div class="small text-center text-muted fst-italic">
+					{{ metadata.footer.copyrights }}<small><br>
+					{{ t.footer.builtWith }} <a href="https://www.11ty.dev/">Eleventy 11ty</a></small>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>    
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
 {%- js %}{% include "public/js/bs.js" %}{% endjs %}
 <script type="module" src="{% getBundleFileUrl "js" %}" defer></script>
