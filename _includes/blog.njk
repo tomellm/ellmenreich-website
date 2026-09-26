@@ -1,0 +1,36 @@
+---
+layout: base.njk
+---
+{% set t = translations[lang] %}
+{% include "partials/header.njk" %}
+<div class="container px-4 px-lg-5">
+<div class="row gx-4 gx-lg-5 justify-content-center">
+<div class="col-md-10 col-lg-8 col-xl-7">
+{% if pagination.items | length %}
+{%- for item in pagination.items %}
+<div class="post-preview">
+<a href="{{ item.url }}"><h2 class="post-title">{{ item.data.title }}</h2></a>
+{% if item.data.description %}<h3 class="post-subtitle">{{ item.data.description }}</h3>{% endif %}
+<p class="post-meta">
+{{ t.post.by }}
+<a href="{{ metadata.author.url | locale_url }}">{{ item.data.author or metadata.author.name }}</a>
+{{ t.post.on }} <time datetime="{{ item.date | htmlDateString }}">{{ item.date | readableDate(lang) }}</time>
+</p>
+</div>
+<hr class="my-4" />
+{% endfor -%}
+{% else %}
+<p>{{ t.post.empty }}</p>
+{% endif %}
+
+<div class="row mt-3 mb-3">
+<div class="col-md-6">
+{% if pagination.href.previous %}<a class="btn btn-primary text-uppercase col-12" href="{{ pagination.href.previous }}">← {{ t.post.previous }}</a>{% endif %}
+</div>
+<div class="col-md-6 text-end mb-4">
+{% if pagination.href.next %}<a class="btn btn-primary text-uppercase col-12" href="{{ pagination.href.next }}">{{ t.post.next }} →</a>{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>

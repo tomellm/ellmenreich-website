@@ -1,0 +1,26 @@
+---js
+const pagination = {
+	data: "collections",
+	size: 1,
+	alias: "tag",
+	filter: ["all", "posts", "posts_de", "posts_it", "posts_en"],
+};
+
+const eleventyExcludeFromCollections = true;
+
+const eleventyComputed = {
+	title: data => `${data.translations[data.lang].tags.tagged} “${data.tag}”`,
+	permalink: function(data) {
+		return `/${data.lang}/tags/${this.slugify(data.tag)}/`;
+	}
+};
+---
+{% set t = translations[lang] %}
+<h1>{{ t.tags.tagged }} “{{ tag }}”</h1>
+
+{% set postslist = collections[tag] %}
+{% include "postslist.njk" %}
+
+<div class="row">
+<div class="col-md-12 mb-5 mt-3"><a class="btn btn-primary text-uppercase col-12" href="/{{ lang }}/tags/">{{ t.tags.explore }}</a></div>
+</div>

@@ -1,27 +1,28 @@
+{% set t = translations[lang] %}
 <div class="my-5">
 <form action="https://formspree.io/f/{{metadata.formspree_id}}" method="POST">
 <div class="form-floating">
-<input class="form-control" id="name" name="name" type="text" placeholder="Fügen Sie ihren Namen ein..." required />
-<label for="name">Name</label>
-<div class="invalid-feedback" data-sb-feedback="name:required">Ein Name ist Pflicht</div>
+<input class="form-control" id="name" name="name" type="text" placeholder="{{ t.form.namePlaceholder }}" autocomplete="name" required>
+<label for="name">{{ t.form.name }}</label>
+<div class="invalid-feedback" data-sb-feedback="name:required">{{ t.form.nameRequired }}</div>
 </div>
 <div class="form-floating">
-<input class="form-control" id="email" type="email"  name="email" placeholder="Fügen sie eine Email ein..." required />
-<label for="phone">Email Addresse</label>
-<div class="invalid-feedback" data-sb-feedback="email:required">Eine Emailaddresse.<div>
+<input class="form-control" id="email" type="email" name="email" placeholder="{{ t.form.emailPlaceholder }}" autocomplete="email" required>
+<label for="email">{{ t.form.email }}</label>
+<div class="invalid-feedback" data-sb-feedback="email:required">{{ t.form.emailRequired }}</div>
 </div>
 <div class="form-floating">
-<textarea class="form-control" name="message" id="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
-<label for="message">Message</label>
-<div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+<textarea class="form-control" name="message" id="message" placeholder="{{ t.form.messagePlaceholder }}" style="height: 12rem" required></textarea>
+<label for="message">{{ t.form.message }}</label>
+<div class="invalid-feedback" data-sb-feedback="message:required">{{ t.form.messageRequired }}</div>
 </div>
 <br />
 <div class="d-none" id="submitSuccessMessage">
 <div class="text-center mb-3">
-<h3>Thanks for your message !!</h3>
+<h3>{{ t.form.success }}</h3>
 </div>
 </div>
-<div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-<button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">Send</button>
+<div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">{{ t.form.error }}</div></div>
+<button class="btn btn-primary text-uppercase" id="submitButton" type="submit">{{ t.form.send }}</button>
 </form>
 </div>

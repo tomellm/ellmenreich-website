@@ -1,10 +1,10 @@
 {
 	"background_color": "#fff",
 	"theme_color": "#e95339",
-	"name": "11ty-clean-blog-startboostrap",
-	"short_name": "11ty-clean-blog-startboostrap",
+	"name": "Ellmenreichs",
+	"short_name": "Ellmis",
 	"display": "minimal-ui",
-	"start_url": "/",
+	"start_url": "/de/",
 	"icons": [
 		{
 			"src": "logo.png",

@@ -2,8 +2,8 @@
 
 // set names for both precache & runtime cache
 workbox.core.setCacheNameDetails({
-    prefix: 'davidbrett',
-    suffix: 'v1.1.2',
+    prefix: 'ellmenreichs',
+    suffix: 'v2',
     precache: 'precache',
     runtime: 'runtime-cache'
 });

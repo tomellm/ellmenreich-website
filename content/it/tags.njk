@@ -1,0 +1,13 @@
+---
+title: Tag
+description: "Tutti i tag degli articoli italiani"
+---
+{% set t = translations[lang] %}
+<h1>{{ t.tags.title }}</h1>
+
+<ul>
+{% for tag in collections | getLocaleTags(lang) %}
+	{% set tagUrl %}/{{ lang }}/tags/{{ tag | slugify }}/{% endset %}
+	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a></li>
+{% endfor %}
+</ul>

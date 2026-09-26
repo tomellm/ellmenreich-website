@@ -7,9 +7,11 @@ WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
-RUN npm ci
 
 COPY . .
+
+ARG SITE_URL=http://localhost:8080
+ENV SITE_URL=${SITE_URL}
 
 RUN npm run build
 

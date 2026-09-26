@@ -1,9 +1,22 @@
+{% set t = translations[lang] %}
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-ui.js"></script>
 <div id="search"></div>
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ element: "#search", showSubResults: true });
+        new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            translations: {
+                placeholder: "{{ t.search.placeholder }}",
+                zero_results: "{{ t.search.zeroResults }}",
+                one_result: "{{ t.search.oneResult }}",
+                many_results: "{{ t.search.manyResults }}",
+                alt_search: "{{ t.search.altSearch }}",
+                search_suggestion: "{{ t.search.suggestion }}",
+                searching: "{{ t.search.searching }}"
+            }
+        });
     });
 </script>
 <div class="mb-5"></div>

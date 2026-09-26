@@ -1,14 +1,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% set localizedPages = page.url | locale_links %}
 <title>{{title or metadata.title}}</title>
 <meta content="{{title or metadata.title}}" property="og:title">
 <meta content="{{title or metadata.title}}" name="twitter:title">
 <meta content="{{title or metadata.title}}" name="title">
 <meta content="{{title or metadata.title}}" property="og:site_name">
-<meta content="{{description or metadata.description}}" name="description">
-<meta content="{{description or metadata.description}}" property="facebook:description">
-<meta content="{{description or metadata.description}}" property="og:description">
-<meta content="{{description or metadata.description}}" name="twitter:description">
+<meta content="{{ description or t.siteDescription }}" name="description">
+<meta content="{{ description or t.siteDescription }}" property="facebook:description">
+<meta content="{{ description or t.siteDescription }}" property="og:description">
+<meta content="{{ description or t.siteDescription }}" name="twitter:description">
 <meta property="twitter:card" content="summary_large_image">
 <meta content="{{image or metadata.image}}" name="twitter:image">
 <meta content="{{image or metadata.image}}" name="facebook:image">
@@ -18,13 +19,21 @@
 <meta content="{{metadata.metasocial.twitteruser}}" property="twitter:author">
 <meta content="{{metadata.metasocial.twitter}}" name="twitter:site">
 <meta property="og:type" content="website">
-<link rel="canonical" href="{{metadata.url}}{{page.url}}">
-<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-<meta name="language" content="{{metadata.language}}">
-<meta name="locale" content="{{metadata.locale}}">
-<meta property="og:locale" content="{{metadata.locale}}">
+<link rel="canonical" href="{{ siteUrl }}{{ page.url }}">
+<link rel="alternate" hreflang="{{ lang }}" href="{{ siteUrl }}{{ page.url }}">
+{% for link in localizedPages %}<link rel="alternate" hreflang="{{ link.lang }}" href="{{ siteUrl }}{{ link.url }}">
+{% endfor %}
+{% if lang == "de" %}<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ page.url }}">
+{% else %}{% for link in localizedPages %}{% if link.lang == "de" %}<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ link.url }}">
+{% endif %}{% endfor %}{% endif %}
+<link rel="alternate" href="/{{ lang }}/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+<meta name="language" content="{{ lang }}">
+<meta name="locale" content="{{ t.locale }}">
+<meta property="og:locale" content="{{ t.locale }}">
+{% for link in localizedPages %}<meta property="og:locale:alternate" content="{{ translations[link.lang].locale }}">
+{% endfor %}
 <meta name="generator" content="{{ eleventy.generator }}"> 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"{{metadata.description}}","headline":"{{metadata.title}} - {{metadata.description}}","name":"{{metadata.title}}","url":"{{metadata.url}}{{page.url}}"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"{{ description or t.siteDescription }}","headline":"{{ title or metadata.title }}","inLanguage":"{{ lang }}","name":"{{ metadata.title }}","url":"{{ siteUrl }}{{ page.url }}"}</script>
 <link rel="manifest" href="/manifest.json" crossorigin="use-credentials"/>
 <link rel="apple-touch-icon" href="{{metadata.favicon}}">
 <meta name="generator" content="{{ eleventy.generator }}">

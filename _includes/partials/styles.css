@@ -1,4 +1,18 @@
 @charset "UTF-8";
+.language-switcher {
+  white-space: nowrap;
+}
+
+.language-switcher a,
+.language-switcher [aria-current="page"] {
+  color: inherit;
+}
+
+.language-switcher [aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

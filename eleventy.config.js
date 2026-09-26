@@ -1,4 +1,4 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
+import { HtmlBasePlugin, IdAttributePlugin, I18nPlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
@@ -7,8 +7,14 @@ import pluginFilters from "./_config/filters.js";
 import { execSync } from 'child_process';
 import pluginPWA from "eleventy-plugin-pwa-v2";
 import CleanCSS from "clean-css";
+
+const languages = ["de", "it", "en"];
+const siteUrl = (process.env.SITE_URL || "http://localhost:8080").replace(/\/$/, "");
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function(eleventyConfig) {
+	eleventyConfig.addGlobalData("siteUrl", siteUrl);
+
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
 		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
@@ -48,31 +54,46 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
-
-	eleventyConfig.addPlugin(feedPlugin, {
-		type: "atom", // or "rss", "json"
-		outputPath: "/feed/feed.xml",
-		stylesheet: "pretty-atom-feed.xsl",
-		templateData: {
-			eleventyNavigation: {
-				key: "Feed",
-				order: 4
-			}
-		},
-		collection: {
-			name: "posts",
-			limit: 10,
-		},
-		metadata: {
-			language: "en",
-			title: "David J. Brett",
-			subtitle: "A pastor serving in the Villages of Florida",
-			base: "https://davidbrett.im/",
-			author: {
-				name: "David J. Brett"
-			}
-		}
+	eleventyConfig.addPlugin(I18nPlugin, {
+		defaultLanguage: "de",
+		errorMode: "strict",
 	});
+
+	for(const language of languages) {
+		eleventyConfig.addCollection(`posts_${language}`, collectionApi => {
+			return collectionApi.getFilteredByTag("posts")
+				.filter(item => item.data.lang === language);
+		});
+	}
+
+	const feedMetadata = {
+		de: { subtitle: "Neuigkeiten von der Familie Ellmenreich" },
+		it: { subtitle: "Novità dalla famiglia Ellmenreich" },
+		en: { subtitle: "News from the Ellmenreich family" },
+	};
+
+	for(const language of languages) {
+		eleventyConfig.addPlugin(feedPlugin, {
+			type: "atom",
+			inputPath: `eleventy-plugin-feed-${language}.njk`,
+			outputPath: `/${language}/feed/feed.xml`,
+			stylesheet: "/feed/pretty-atom-feed.xsl",
+			collection: {
+				name: `posts_${language}`,
+				limit: 10,
+			},
+			metadata: {
+				language,
+				title: "Ellmenreichs",
+				subtitle: feedMetadata[language].subtitle,
+				base: `${siteUrl}/`,
+				author: {
+					name: "Friedrich & Thomas Ellmenreich",
+					url: `${siteUrl}/${language}/about/`,
+				},
+			},
+		});
+	}
 
 	  eleventyConfig.on('eleventy.after', () => {
 		execSync(`npx pagefind --site _site --glob \"**/*.html\"`, { encoding: 'utf-8' })
