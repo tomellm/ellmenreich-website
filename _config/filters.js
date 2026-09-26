@@ -60,6 +60,10 @@ export default function(eleventyConfig) {
 		return (items || []).filter(item => item.data.lang === language);
 	});
 
+	eleventyConfig.addFilter("includeCurrentLocale", (links, language) => {
+		return [...(links || []), { lang: language }];
+	});
+
 	eleventyConfig.addFilter("filterTagList", function filterTagList(tags) {
 		return (tags || []).filter(tag => tag !== "all" && !tag.startsWith("posts"));
 	});

@@ -11,10 +11,13 @@
 {% for n in metadata.navbar %}<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ n.link | locale_url }}">{{ t.nav[n.key] }}</a></li>{% endfor %}
 <li class="nav-item">
 <span class="nav-link px-lg-3 py-3 py-lg-4 language-switcher" aria-label="{{ t.languageSwitcher }}">
-<span aria-current="page" title="{{ t.languageName }}">{{ lang | upper }}</span>
-{% for link in page.url | locale_links %}
-<span aria-hidden="true">·</span>
+{% for link in page.url | locale_links | includeCurrentLocale(lang) | sort(false, false, 'lang') %}
+{% if not loop.first %}<span aria-hidden="true">·</span>{% endif %}
+{% if link.lang == lang %}
+<span aria-current="page" title="{{ t.languageName }}">{{ link.lang | upper }}</span>
+{% else %}
 <a href="{{ link.url }}" lang="{{ link.lang }}" hreflang="{{ link.lang }}" title="{{ link.label }}">{{ link.lang | upper }}</a>
+{% endif %}
 {% endfor %}
 </span>
 </li>

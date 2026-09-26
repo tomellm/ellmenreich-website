@@ -1,5 +1,9 @@
 @charset "UTF-8";
-.language-switcher {
+#mainNav .navbar-nav > li.nav-item > .language-switcher {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.0625em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -8,9 +12,38 @@
   color: inherit;
 }
 
+.language-switcher a {
+  text-decoration: none;
+}
+
 .language-switcher [aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 0.2em;
+}
+
+.language-switcher a:focus,
+.language-switcher a:hover {
+  color: #0085A1;
+}
+
+@media (min-width: 992px) {
+  #mainNav .navbar-nav > li.nav-item > .language-switcher {
+    color: #fff;
+  }
+
+  #mainNav .language-switcher a:focus,
+  #mainNav .language-switcher a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  #mainNav.is-fixed .navbar-nav > li.nav-item > .language-switcher {
+    color: #212529;
+  }
+
+  #mainNav.is-fixed .language-switcher a:focus,
+  #mainNav.is-fixed .language-switcher a:hover {
+    color: #0085A1;
+  }
 }
 
 :root {
