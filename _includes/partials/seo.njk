@@ -18,17 +18,29 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="{{ siteUrl }}{{ page.url }}">
 <link rel="alternate" hreflang="{{ lang }}" href="{{ siteUrl }}{{ page.url }}">
-{% for link in localizedPages %}<link rel="alternate" hreflang="{{ link.lang }}" href="{{ siteUrl }}{{ link.url }}">
+
+{% for link in localizedPages %}
+<link rel="alternate" hreflang="{{ link.lang }}" href="{{ siteUrl }}{{ link.url }}">
 {% endfor %}
-{% if lang == "de" %}<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ page.url }}">
-{% else %}{% for link in localizedPages %}{% if link.lang == "de" %}<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ link.url }}">
-{% endif %}{% endfor %}{% endif %}
+
+{% if lang == "de" %}
+<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ page.url }}">
+{% else %}
+{% for link in localizedPages %}
+{% if link.lang == "de" %}
+<link rel="alternate" hreflang="x-default" href="{{ siteUrl }}{{ link.url }}">
+{% endif %}
+{% endfor %}
+{% endif %}
 <link rel="alternate" href="/{{ lang }}/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 <meta name="language" content="{{ lang }}">
 <meta name="locale" content="{{ t.locale }}">
 <meta property="og:locale" content="{{ t.locale }}">
-{% for link in localizedPages %}<meta property="og:locale:alternate" content="{{ translations[link.lang].locale }}">
+
+{% for link in localizedPages %}
+<meta property="og:locale:alternate" content="{{ translations[link.lang].locale }}">
 {% endfor %}
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"{{ description or t.siteDescription }}","headline":"{{ title or metadata.title }}","inLanguage":"{{ lang }}","name":"{{ metadata.title }}","url":"{{ siteUrl }}{{ page.url }}"}</script>
 <link rel="manifest" href="/manifest.json" crossorigin="use-credentials"/>
 <link rel="apple-touch-icon" href="{{metadata.favicon}}">
