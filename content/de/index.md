@@ -1,7 +1,7 @@
 ---
 layout: home.njk
 title: Ellmenreichs
-description: "Die Website der Familie XXXXXXXXXXXXXXXXXXXXXXXX Ellmenreich"
+description: "Die Website der Familie Ellmenreich"
 ---
 
 ## Die Website der Familie Ellmenreich

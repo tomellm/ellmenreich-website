@@ -1,6 +1,6 @@
 ---
 title: Über uns
-description: "Mehr über die Familie Ellmenreich"
+description: "Mehr über die Familie Ellmenreich, bzw. Elmenreich"
 image: https://objects.homelab.tomellm.eu/ellmenreich-webiste/tribal-leader-ermanaric.jpg
 ---
 
